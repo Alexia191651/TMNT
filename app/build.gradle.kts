@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    //Addition
     id("kotlin-kapt")
 }
 
@@ -19,7 +20,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    // Step 14 changes
     buildFeatures {
         viewBinding = true
         dataBinding = true
