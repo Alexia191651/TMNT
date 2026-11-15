@@ -1,13 +1,15 @@
 package com.example.tenantmanagementsystem
 
-import java.io.Serializable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity(tableName = "tenants")
 data class Tenant(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val name: String,
     val phone: String,
-    val rent: String
-) : Serializable {
-    fun summary(): String {
-        return "Tenant: $name\nPhone: $phone\nRent: KSh $rent"
-    }
+    val unit: String,
+    val monthlyRent: Double
+) {
+    fun summary() = "Tenant: $name\nPhone: $phone\nUnit: $unit\nRent: KSh %,.0f".format(monthlyRent)
 }
