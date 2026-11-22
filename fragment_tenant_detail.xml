@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/surface_bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Tenant Info Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@color/card_bg">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/detailTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_primary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E2E8F0"
+                        android:layout_marginVertical="12dp" />
+
+                    <TextView
+                        android:id="@+id/statusTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Quick Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/callButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CALL"
+                    android:backgroundTint="@color/brand_primary"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/shareButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SHARE"
+                    android:backgroundTint="@color/brand_primary"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/payButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="RECORD PAY"
+                    android:backgroundTint="@color/brand_accent"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <!-- Edit & Delete Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp">
+
+                <Button
+                    android:id="@+id/editButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="EDIT TENANT"
+                    android:backgroundTint="@color/brand_primary_dark"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="DELETE TENANT"
+                    android:backgroundTint="#DC2626"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="4dp" />
+
+            </LinearLayout>
+
+            <!-- Water & Electricity Maintenance Section Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="🛠 Water &amp; Electricity Maintenance"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/reportMaintenanceButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+ REPORT ISSUE"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/brand_accent"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/maintenancesRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false" />
+
+            <TextView
+                android:id="@+id/emptyMaintenanceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No maintenance issues reported for this tenant."
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Payment History Section Header -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💳 Payment History (long-press to delete)"
+                android:textColor="@color/text_primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/paymentsRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

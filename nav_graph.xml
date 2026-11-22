@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
@@ -10,41 +9,42 @@
         android:id="@+id/dashboardFragment"
         android:name="com.example.tenantmanagementsystem.DashboardFragment"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard"
-        app:layout_editor_absoluteX="16dp"
-        app:layout_editor_absoluteY="16dp">
-        <action
-            android:id="@+id/action_dashboardFragment_to_addTenantFragment"
-            app:destination="@id/addTenantFragment" />
-        <action
-            android:id="@+id/action_dashboardFragment_to_viewTenantsFragment"
-            app:destination="@id/viewTenantsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/tenantListFragment"
+        android:name="com.example.tenantmanagementsystem.TenantListFragment"
+        android:label="Tenants"
+        tools:layout="@layout/fragment_tenant_list" />
+
+    <fragment
+        android:id="@+id/addEditTenantFragment"
+        android:name="com.example.tenantmanagementsystem.AddEditTenantFragment"
+        android:label="Tenant"
+        tools:layout="@layout/fragment_add_edit_tenant" />
+
+    <fragment
+        android:id="@+id/tenantDetailFragment"
+        android:name="com.example.tenantmanagementsystem.TenantDetailFragment"
+        android:label="Tenant details"
+        tools:layout="@layout/fragment_tenant_detail" />
 
     <fragment
         android:id="@+id/addTenantFragment"
         android:name="com.example.tenantmanagementsystem.AddTenantFragment"
         android:label="Add Tenant"
-        tools:layout="@layout/fragment_add_tenant"
-        app:layout_editor_absoluteX="350dp"
-        app:layout_editor_absoluteY="16dp">
-        <action
-            android:id="@+id/action_addTenantFragment_to_viewTenantsFragment"
-            app:destination="@id/viewTenantsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_tenant" />
 
     <fragment
         android:id="@+id/viewTenantsFragment"
         android:name="com.example.tenantmanagementsystem.ViewTenantsFragment"
         android:label="View Tenants"
-        tools:layout="@layout/fragment_view_tenants"
-        app:layout_editor_absoluteX="680dp"
-        app:layout_editor_absoluteY="16dp">
-        <argument
-            android:name="newTenant"
-            app:argType="com.example.tenantmanagementsystem.Tenant"
-            app:nullable="true"
-            android:defaultValue="@null" />
-    </fragment>
+        tools:layout="@layout/fragment_view_tenants" />
+
+    <fragment
+        android:id="@+id/maintenanceFragment"
+        android:name="com.example.tenantmanagementsystem.MaintenanceFragment"
+        android:label="Water &amp; Electricity"
+        tools:layout="@layout/fragment_maintenance" />
 
 </navigation>

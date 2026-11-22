@@ -1,13 +1,25 @@
 package com.example.tenantmanagementsystem
 
-object TenantRepository {
-    val tenants = mutableListOf<Tenant>()
+import kotlinx.coroutines.flow.Flow
 
-    fun addTenant(tenant: Tenant) {
-        tenants.add(tenant)
-    }
+class TenantRepository(private val tenantDao: TenantDao) {
 
-    fun totalRent(): Double {
-        return tenants.sumOf { it.rent.toDoubleOrNull() ?: 0.0 }
+    val allTenants: Flow<List<Tenant>> = tenantDao.observeAllTenants(SessionManager.currentUserEmail)
+    val totalRent: Flow<Double> = tenantDao.totalRent(SessionManager.currentUserEmail)
+
+    suspend fun addTenant(tenant: Tenant): Long = tenantDao.insert(tenant.copy(ownerEmail = SessionManager.currentUserEmail))
+    suspend fun getTenantById(id: Long): Tenant? = tenantDao.getById(id)
+    suspend fun updateTenant(tenant: Tenant) = tenantDao.update(tenant)
+    suspend fun deleteTenant(tenant: Tenant) = tenantDao.delete(tenant)
+
+    companion object {
+        @Volatile
+        private var INSTANCE: TenantRepository? = null
+
+        fun getInstance(database: AppDatabase): TenantRepository {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: TenantRepository(database.tenantDao()).also { INSTANCE = it }
+            }
+        }
     }
 }

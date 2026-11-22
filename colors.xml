@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom Palette: #114B5F, #1A936F, #88D498, #C6DABF, #F3E9D2 -->
+    <color name="brand_primary">#114B5F</color>
+    <color name="brand_primary_dark">#0D3A4B</color>
+    <color name="brand_accent">#1A936F</color>
+    <color name="surface_bg">#F3E9D2</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="text_primary">#114B5F</color>
+    <color name="text_secondary">#1A936F</color>
+    <color name="white">#FFFFFF</color>
+</resources>

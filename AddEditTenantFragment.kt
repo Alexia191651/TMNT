@@ -20,12 +20,14 @@ class AddEditTenantFragment : Fragment() {
     private var editingId = 0L
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
-        _binding = FragmentAddEditTenantBinding.inflate(i, c, false); return binding.root
+        _binding = FragmentAddEditTenantBinding.inflate(i, c, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         editingId = arguments?.getLong("tenantId", 0L) ?: 0L
         if (editingId != 0L) {
+            binding.formTitleTextView.text = "Edit Tenant"
             viewLifecycleOwner.lifecycleScope.launch {
                 vm.getTenant(editingId)?.let {
                     binding.nameEditText.setText(it.name)
@@ -34,6 +36,8 @@ class AddEditTenantFragment : Fragment() {
                     binding.rentEditText.setText(it.monthlyRent.toString())
                 }
             }
+        } else {
+            binding.formTitleTextView.text = "Add New Tenant"
         }
         binding.saveButton.setOnClickListener { save() }
     }
@@ -54,9 +58,12 @@ class AddEditTenantFragment : Fragment() {
         if (!ok) return
 
         vm.save(Tenant(id = editingId, name = name, phone = phone, unit = unit, monthlyRent = rent!!))
-        Toast.makeText(requireContext(), "Tenant saved", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), if (editingId != 0L) "Tenant updated" else "Tenant saved", Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
     }
 
-    override fun onDestroyView() { super.onDestroyView(); _binding = null }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

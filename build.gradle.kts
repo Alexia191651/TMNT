@@ -5,7 +5,6 @@ plugins {
     // Safe Args plugin for navigation and data passing
     id("androidx.navigation.safeargs.kotlin")
 }
-
 android {
     namespace = "com.example.tenantmanagementsystem"
     compileSdk = 37
@@ -49,6 +48,11 @@ dependencies {
     // Navigation Component & Safe Args dependencies
     implementation("androidx.navigation:navigation-fragment-ktx:2.9.8")
     implementation("androidx.navigation:navigation-ui-ktx:2.9.8")
+
+    // Room Database dependencies
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
 
     // Standard AndroidX & Material UI dependencies
     implementation(libs.androidx.core.ktx)

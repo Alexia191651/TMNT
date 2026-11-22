@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tenantmanagementsystem.databinding.FragmentTenantListBinding
+import kotlinx.coroutines.launch
 
 class TenantListFragment : Fragment() {
     private var _binding: FragmentTenantListBinding? = null
@@ -18,17 +21,39 @@ class TenantListFragment : Fragment() {
     private val vm: TenantViewModel by activityViewModels()
 
     override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View {
-        _binding = FragmentTenantListBinding.inflate(i, c, false); return binding.root
+        _binding = FragmentTenantListBinding.inflate(i, c, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = RowAdapter(onClick = { row ->
-            findNavController().navigate(R.id.tenantDetailFragment, bundleOf("tenantId" to row.id))
-        })
+        val adapter = RowAdapter(
+            onClick = { row ->
+                findNavController().navigate(R.id.tenantDetailFragment, bundleOf("tenantId" to row.id))
+            },
+            onEditClick = { row ->
+                findNavController().navigate(R.id.addEditTenantFragment, bundleOf("tenantId" to row.id))
+            },
+            onDeleteClick = { row ->
+                viewLifecycleOwner.lifecycleScope.launch {
+                    val tenant = vm.getTenant(row.id)
+                    if (tenant != null) {
+                        AlertDialog.Builder(requireContext())
+                            .setTitle("Delete ${tenant.name}?")
+                            .setMessage("Are you sure you want to delete this tenant and their payment history?")
+                            .setPositiveButton("Delete") { _, _ -> vm.delete(tenant) }
+                            .setNegativeButton("Cancel", null)
+                            .show()
+                    }
+                }
+            }
+        )
         binding.recycler.layoutManager = LinearLayoutManager(requireContext())
         binding.recycler.adapter = adapter
 
-        vm.setQuery("")
+        // Preserve and restore active search query state across navigation
+        if (binding.searchEditText.text.toString() != vm.query.value) {
+            binding.searchEditText.setText(vm.query.value)
+        }
         binding.searchEditText.doOnTextChanged { t, _, _, _ -> vm.setQuery(t.toString().trim()) }
         binding.addFab.setOnClickListener { findNavController().navigate(R.id.addEditTenantFragment) }
 
@@ -38,5 +63,8 @@ class TenantListFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() { super.onDestroyView(); _binding = null }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
