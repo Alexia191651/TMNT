@@ -1,4 +1,4 @@
-Housing Management System
+## Housing Management System
 An Android app for landlords to record tenants, see total rent, water bills and electricity bills  and call tenants.
 
 ## Download
