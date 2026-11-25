@@ -1,5 +1,5 @@
-# Tenant Management System
-An Android app for landlords to record tenants, see total rent, and call tenants.
+Housing Management System
+An Android app for landlords to record tenants, see total rent, water bills and electricity bills  and call tenants.
 
 ## Download
 Latest APK: see **Releases** on the right of this page.
